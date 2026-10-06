@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gullu AI — AI Video Generator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#090b14;color:#fff}
+.wrap{max-width:720px;margin:auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 24px}
+.logo{font-size:25px;font-weight:800;background:linear-gradient(90deg,#7c5cff,#00d4ff);-webkit-background-clip:text;color:transparent}
+.badge{font-size:12px;background:#171a29;border:1px solid #292e45;padding:7px 10px;border-radius:20px;color:#bfc5df}
+.hero{text-align:center;padding:25px 5px 18px}.hero h1{font-size:38px;margin:8px 0 12px}.hero p{color:#aeb5cc;line-height:1.5}
+.card{background:#111522;border:1px solid #252b40;border-radius:20px;padding:18px;margin-top:18px;box-shadow:0 10px 35px #0005}
+label{display:block;font-weight:700;margin:4px 0 9px}
+textarea,select{width:100%;background:#0b0e18;color:#fff;border:1px solid #30364d;border-radius:13px;padding:14px;font-size:15px;outline:none}
+textarea{min-height:130px;resize:vertical}select{height:48px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+button{width:100%;border:0;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer}
+.generate{margin-top:16px;background:linear-gradient(90deg,#7657ff,#00cfff);color:#fff}
+.generate:disabled{opacity:.6}.status{display:none;text-align:center;padding:18px;color:#bfc5df}
+.loader{width:28px;height:28px;border:3px solid #30364d;border-top-color:#00cfff;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.result{display:none}.video-box{aspect-ratio:16/9;background:#080a11;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#777;border:1px dashed #343a52}
+.download{margin-top:12px;background:#20263a;color:white}
+.note{font-size:12px;color:#8189a5;line-height:1.5;margin-top:14px}
+footer{text-align:center;color:#68708a;font-size:12px;padding:25px}
+@media(max-width:500px){.hero h1{font-size:31px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">✨ Gullu AI</div><div class="badge">FREE MVP</div></header>
+
+<section class="hero">
+<h1>AI Video Generator 🎬</h1>
+<p>Apna idea likho aur future mein AI se 10–60 second ke videos generate karo.</p>
+</section>
+
+<div class="card">
+<label for="prompt">🎯 Video Prompt</label>
+<textarea id="prompt" placeholder="Example: Ek cute Indian bacchi school mein funny cartoon bana rahi hai..."></textarea>
+
+<div class="grid">
+<div><label for="style">🎨 Style</label>
+<select id="style"><option>3D Cartoon</option><option>Realistic</option><option>Anime</option><option>Cinematic</option></select></div>
+<div><label for="duration">⏱️ Duration</label>
+<select id="duration"><option value="10">10 sec</option><option value="30">30 sec</option><option value="60">60 sec</option></select></div>
+</div>
+
+<button class="generate" id="generate">🚀 Generate Video</button>
+<div class="status" id="status"><div class="loader"></div><b>Gullu AI video prepare kar raha hai...</b><br><small>Demo mode — AI API abhi connect nahi hai.</small></div>
+</div>
+
+<div class="card result" id="result">
+<label>🎬 Your Video</label>
+<div class="video-box">Video preview yahan dikhega</div>
+<button class="download" onclick="alert('Real video download ke liye AI video API connect karni hogi.')">⬇️ Download Video</button>
+<p class="note">Ye first MVP/demo hai. Actual AI video generation ke liye backend + video model/API connect karna hoga.</p>
+</div>
+
+<footer>© 2026 Gullu AI • Made for creative video generation</footer>
+</div>
+
+<script>
+const btn=document.getElementById('generate');
+const prompt=document.getElementById('prompt');
+const status=document.getElementById('status');
+const result=document.getElementById('result');
+btn.onclick=()=>{
+ if(!prompt.value.trim()){alert('Pehle apna video prompt likho 😊');prompt.focus();return}
+ btn.disabled=true; status.style.display='block'; result.style.display='none';
+ setTimeout(()=>{status.style.display='none';result.style.display='block';btn.disabled=false},2200);
+};
+</script>
+</body>
+</html>
